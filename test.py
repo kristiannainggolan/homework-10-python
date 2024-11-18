@@ -19,9 +19,9 @@ class SoftDrikMarket:
     
     def record_sales(self, coca_sales, pepsi_sales):
 
-        total_sales = coca_sales + pepsi_sales
-        market_sales_coca = coca_sales/total_sales * 100
-        market_sales_pepsi = pepsi_sales/total_sales * 100
+        self.total_sales = coca_sales + pepsi_sales
+        market_sales_coca = coca_sales/self.total_sales * 100
+        market_sales_pepsi = pepsi_sales/self.total_sales * 100
 
         self.market_share.update({"coca cola" : market_sales_coca})
         self.market_share.update({"pepsi": market_sales_pepsi})
@@ -29,9 +29,19 @@ class SoftDrikMarket:
         print(self.market_share.get("coca cola"))
         print(self.market_share.get("pepsi"))
         print(self.market_share)
-        print(f'Total sales adalah {total_sales}, dengan market share coca : {market_sales_coca} % dan market share pepsi : {market_sales_pepsi} %')
+        print(f'Total sales adalah {self.total_sales}, dengan market share coca : {market_sales_coca} % dan market share pepsi : {market_sales_pepsi} %')
+
+    def check_leader(self):
+        if self.market_share.get("coca cola") > self.market_share.get("pepsi"):
+            self.current_leader = "coca cola"
+        else:
+            self.current_leader = "pepsi"
+
+        return self.current_leader
+
 
 
 sf = SoftDrikMarket()
 sf.record_sales(20,30)
+print(f'The leader on the marker is {sf.check_leader()}')
 
